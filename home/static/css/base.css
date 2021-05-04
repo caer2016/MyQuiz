@@ -1,0 +1,73 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+	color: white;
+	font-family: "Roboto", sans-serif;
+    text-shadow: 2px 2px 10px black;
+}
+
+.wrapper {
+	background: rgba(0, 0, 0, 0.5) url('../images/banner.jpg')no-repeat;
+	background-position: center;
+	background-size: cover;
+	min-height: 100vh;
+	overflow: hidden;
+	background-blend-mode: overlay;
+}
+
+.wrapper .wave {
+	position: absolute;
+	width: 100%;
+	bottom: -80px;
+	color: #fff;
+	opacity: 1;
+}
+
+.wrapper header {
+	z-index: 1;
+	background: #22242A;
+	position: fixed;
+	width: calc(100% - 0%);
+	height: 70px;
+	display: flex;
+	top: 0;
+}
+
+.wrapper header .headerMenu {
+	width: calc(100% - 0%);
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.wrapper header .headerMenu .logo {
+	position: relative;
+	color: #fff;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight: 900;
+}
+
+.wrapper header .headerMenu .logo span {
+	color: #4CCEE8;
+}
+
+.wrapper header .headerMenu ul li {
+	display: inline-block;
+}
+
+.wrapper header .headerMenu ul li a {
+	font-size: 18px;
+	margin: 0 25px;
+	font-weight: 300;
+	letter-spacing: 1px;
+}
+
+.wrapper header .headerMenu ul li a:hover {
+	color: #dddfe2;
+}

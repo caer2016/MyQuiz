@@ -1,0 +1,32 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block linkCss %}
+<link rel="stylesheet" type="text/css" href="../static/css/register.css">
+{% endblock %}
+
+{% block content %}
+<div class="formBox">
+    <div class="buttonGroup">
+        <div id="switch"></div>
+        <a href="{% url 'login' %}"><button type="button" class="toggleButton">Login</button></a>
+        <button type="button" class="toggleButton">Register</button>
+    </div>
+    
+    <form id="register" class="inputGroup">
+        <label for="teaOrStu">You are:</label>
+        <div id="teaOrStu">
+          <select class="selectCustom">
+            <option value="empty">--</option>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+          </select>
+        <input type="text" class="inputField" placeholder="Username" name="userName">
+        <input type="password" class="inputField" placeholder="Password" name="password">
+        <input type="password" class="inputField" placeholder="Confirm Password" name="comfirmPass">
+        <input type="checkbox" class="checkBox"><span>I agree  to the terms conditions</span>
+        <button type="submit" class="submitButton">Register</button>
+    </form>
+</div>
+{% endblock %}

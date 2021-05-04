@@ -1,0 +1,23 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Login{% endblock %}
+{% block linkCss %}
+<link rel="stylesheet" type="text/css" href="../static/css/login.css">
+{% endblock %}
+
+{% block content %}
+<div class="formBox">
+    <div class="buttonGroup">
+        <div id="switch"></div>
+        <button type="button" class="toggleButton">Login</button>
+        <a href="{% url 'register' %}"><button type="button" class="toggleButton">Register</button></a>
+    </div>
+    
+    <form id="login" class="inputGroup">
+        <input type="text" class="inputField" placeholder="Username" id="userlogin" name="userName">
+        <input type="password" class="inputField" placeholder="Password" name="password">
+        <input type="checkbox" class="checkBox"><span>Remember Password</span>
+        <button type="submit" class="submitButton">Log in</button>
+    </form>
+</div>
+{% endblock %}

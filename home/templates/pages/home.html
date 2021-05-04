@@ -1,0 +1,18 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block linkCss %}
+<link rel="stylesheet" type="text/css" href="../static/css/home.css">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>This is h1</h1>
+    <p>This is p bla bla...</p>
+    <div class="buttonGroup">
+        <a href="{% url 'register' %}"><button type="button" class="toggleButton">Create now</button></a>
+    </div>
+</div>
+
+{% endblock %}
