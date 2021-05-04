@@ -42,4 +42,5 @@ def learning_view(request, id = None):
 
 def learning_complete(request):
 
+    del request.session['learning']
     return HttpResponse("Complete")
