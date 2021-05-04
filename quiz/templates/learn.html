@@ -3,7 +3,8 @@
 {{question.hint}} <br>
 {{question.answer}} <br>
 
-<form action="{% url 'learning' %}" method="post">
+<form action="{% url 'learn' %}" method="post">
+    {% csrf_token %}
     <button name="correct" value="True">Pass</button>
     <button name="correct" value="False">Fail</button>
 </form>
