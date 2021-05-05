@@ -1,3 +1,7 @@
+{% if failed %}
+<p>Error editting pack. Please try again</p>
+{% endif %}
+
 <form action="{% url 'edit_pack' pack.id %}" method="POST">
     {% csrf_token %}
     <label for="name">Pack Name</label>

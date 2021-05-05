@@ -1,3 +1,7 @@
+{% if failed %}
+<p>Error editting question. Please try again</p>
+{% endif %}
+
 <form action="{% url 'edit_question' question.id %}" method="POST">
     {% csrf_token %}
     <label for="question">Question</label>

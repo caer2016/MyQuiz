@@ -1,3 +1,11 @@
+{% if failed %}
+<p>Error adding question. Please try again</p>
+{% endif %}
+
+{% if success %}
+<p>Question added</p>
+{% endif %}
+
 <form action="{% url 'add_question' packid%}" method="POST">
     {% csrf_token %}
     <label for="question">Question</label>

@@ -45,7 +45,7 @@ def learning_view(request, id = None):
 def learning_complete(request):
 
     del request.session['learning']
-    return HttpResponse("Complete") #Temporary
+    return render(request, 'learn_complete.html')
 
 def add_pack(request):
 
@@ -97,7 +97,7 @@ def edit_pack(request, id):
 def delete_pack(request, id):
     pack = get_object_or_404(QuizPack, id = id)
     pack.deltete()
-    return HttpResponse("Deleted") #Temporary
+    return HttpResponse("Deleted") #Temporary. REPLACE THIS WITH REDIRECT
 
 def add_question(request, id):
     pack = get_object_or_404(QuizPack, id = id)
@@ -108,7 +108,7 @@ def add_question(request, id):
             question = request.POST['question']
             answer = request.POST['answer']
         except:
-            return render(request, 'add_question.html', {'failed' : True})
+            return render(request, 'add_question.html', {'failed' : True, 'packid' : id})
         
         try:
             hint = request.POST['hint']
@@ -120,7 +120,7 @@ def add_question(request, id):
 
         return render(request, 'add_question.html', {'success' : True, 'packid' : id})
 
-    return render(request, 'add_question.html', {'id' : id})
+    return render(request, 'add_question.html', {'packid' : id})
 
 def edit_question(request, id):
     question = get_object_or_404(Question, id = id)
