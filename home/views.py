@@ -43,8 +43,8 @@ def after_login(request):
         return redirect('/user/teacher_dashboard/')
 
 def show_class_list(request):
-    data = {'Classes': ClassModel.objects.all().order_by("-beginDate")}
+    #data = {'Classes': ClassModel.objects.all().order_by("-beginDate")}
     return render(request, 'pages/classes.html', data)
 
-def find_info(request):
+def find_info(request): 
     return render(request, 'pages/search_info.html')
