@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include("home.urls")),
     path('after_login/', views.after_login, name='after_login'),
     path('user/', include('user.urls')),
-
+    path('learn/', include('quiz.urls')),
 ]
