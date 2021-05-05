@@ -8,5 +8,30 @@
 </head>
 <body>
     <p>Hello Student</p>
+    {% if schedule %}
+        <p>Your schedule for today</p><br>
+        <a href="{% url 'learn' %}"><button>Learn all</button></a>
+        <br>
+        {% for pack in schedule %}
+            {{pack.name}}
+            {{pack.scheduled_count}}
+            <a href="{% url 'learn' pack.id %}"><button>Learn</button></a>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>Your schedule is empty for today</p>
+    {% endif %}
+
+    <p>Your collection</p>
+    <a href="{% url 'all_quizpack'%}"><button>Add more packs</button></a>
+    <br>
+    {% for pack in collection %}
+        {{pack.name}}
+        {{pack.name}}
+        {{pack.category}}
+        {{pack.created_date}}
+        <a href="{% url 'unregister_pack' pack.id %}"><button>Remove from collection</button></a>
+        <br>
+    {% endfor %}
 </body>
 </html>

@@ -25,6 +25,7 @@ def learning_view(request, id = None):
     if id==None:
         scheduled = QuestionSchedule.objects.filter(user = request.user, scheduled_time__lte = now())
     else:
+        quiz_pack = get_object_or_404(QuizPack, id = id)
         scheduled = QuestionSchedule.objects.filter(user = request.user, question__pack = quiz_pack, scheduled_time__lte = now())
 
     if request.method == 'POST':
@@ -37,14 +38,13 @@ def learning_view(request, id = None):
     if len(scheduled)==0:
         return redirect('learning_complete')
 
-    learning = scheduled.order_by('scheduled_time').first()
+    learning = scheduled.order_by('scheduled_time', 'question__id').first()
     request.session['learning'] = learning.id
 
-    return render(request, 'learn.html', {'question' : learning.question})
+    return render(request, 'learn.html', {'question' : learning.question, 'packid':id})
 
 def learning_complete(request):
 
-    del request.session['learning']
     return render(request, 'learn_complete.html')
 
 def add_pack(request):
@@ -152,8 +152,20 @@ def delete_question(request, id):
     question.delete()
     return redirect('edit_pack', question.pack.id)
 
-def register_pack(user, packid : int):
-    pack = get_object_or_404(QuizPack, id=id)
+def register_pack(user, packid):
+    pack = get_object_or_404(QuizPack, id=packid)
+    if user in pack.registered_user.all():
+        return
+    pack.registered_user.add(user)
 
     for question in pack.question_set.all():
         QuestionSchedule.objects.create(user = user, question = question, scheduled_time=now(), previous_interval=DEFAULT_INTERVAL)
+
+def unregister_pack(user, packid):
+    pack = get_object_or_404(QuizPack, id=packid)
+    if not user in pack.registered_user.all():
+        return
+    pack.registered_user.remove(user)
+
+    for questionschedule in QuestionSchedule.objects.filter(user = user, question__pack = pack):
+        questionschedule.delete()

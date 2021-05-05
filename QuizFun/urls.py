@@ -21,6 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("home.urls")),
     path('after_login/', views.after_login, name='after_login'),
-    path('', include('user.urls')),
+    path('user/', include('user.urls')),
     path('learn/', include('quiz.urls')),
 ]
