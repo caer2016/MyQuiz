@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách các lớp học</title>
+</head>
+
+{% block title %}Danh sách lớp học hiện có{% endblock %}
+
+{% block content %}
+    {% for class in Classes %}
+        <h3>{{class.beginDate|date:"d-m-Y"}}<a href="/classes/{{class.id}}">{{ class.className }}</a></h3>
+    {% endfor %}
+{% endblock %}
+
+</html>

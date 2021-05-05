@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . import forms
+from .models import QUser
 
 # Create your views here.
 

@@ -1,13 +1,9 @@
-from django.shortcuts import render,redirect,reverse
-from django.db.models import Sum
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required,user_passes_test
-from django.conf import settings
-from datetime import date, timedelta
-from django.db.models import Q
-from django.contrib.auth.models import User
 from user import forms
+from .models import ClassModel
+
 # Create your views here.
 def index(request):
     return render(request, 'pages/home.html')
@@ -45,3 +41,10 @@ def after_login(request):
         return redirect('/user/student_dashboard/')
     elif is_teacher(request.user):
         return redirect('/user/teacher_dashboard/')
+
+def show_class_list(request):
+    data = {'Classes': ClassModel.objects.all().order_by("-beginDate")}
+    return render(request, 'pages/classes.html', data)
+
+def find_info(request):
+    return render(request, 'pages/search_info.html')

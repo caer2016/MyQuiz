@@ -1,13 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
+
 
 class QUser(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+
     @property
     def get_name(self):
         return self.user.first_name + " " + self.user.last_name
+
     @property
     def get_instance(self):
         return self
+
     def __str__(self):
-        return self.user.first_name
+        return get_name(self)
+
+
+
+
+
+
+
