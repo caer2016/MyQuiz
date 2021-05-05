@@ -8,7 +8,6 @@ from datetime import date, timedelta
 from django.db.models import Q
 from django.contrib.auth.models import User
 from user import forms
-from .models import Courses
 
 # Create your views here.
 def index(request):
@@ -48,11 +47,5 @@ def after_login(request):
     elif is_teacher(request.user):
         return redirect('/user/teacher_dashboard/')
 
-def show_courses_list(request):
-    data={'courses': Courses.objects.all().order_by("-beginDate")}
-    if data:
-        return render(request, 'pages/courses_list.html', data)
-    else:
-        return HttpResponse("Hiện tại chưa có khóa học nào")
 
 
