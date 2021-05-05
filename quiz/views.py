@@ -92,12 +92,12 @@ def edit_pack(request, id):
         pack.save()
         return redirect('edit_pack', pack.id)
 
-    return render(request, 'edit_pack.html', {'pack' : pack})
+    return render(request, 'edit_pack.html', {'pack' : pack, 'current_course_id' : request.session['current_course_id']})
 
 def delete_pack(request, id):
     pack = get_object_or_404(QuizPack, id = id)
     pack.deltete()
-    return HttpResponse("Deleted") #Temporary. REPLACE THIS WITH REDIRECT
+    return redirect('edit_course', request.session['current_course_id'])
 
 def add_question(request, id):
     pack = get_object_or_404(QuizPack, id = id)

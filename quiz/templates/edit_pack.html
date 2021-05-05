@@ -28,3 +28,6 @@
 {% empty %}
 <p>No questions</p>
 {% endfor %}
+
+<a href="{% url 'edit_course' current_course_id %}"><button>Back</button></a>
+<a href="{% url 'delete_pack' pack.id %}"><button>Delete pack</button></a>

@@ -8,7 +8,8 @@
     {% block content %}
         <h3>Tên khóa học: {{course.courseName}}</h3>
         <h3>Ngày tạo: {{course.beginDate}}</h3>
-        Giáo viên phụ trách: {{course.manageTeacher.get_name|safe}}
+        Giáo viên phụ trách: {{course.manageTeacher.username|safe}}
+        <a href="{% url 'register_course' course.id %}"><button>Register</button></a>
         <br>
     {% endblock %}
 </body>

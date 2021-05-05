@@ -1,0 +1,25 @@
+{{course.name}}
+
+<p>Required packs</p>
+{% for pack in added_pack_list %}
+{{pack.name}}
+{{pack.category}}
+{{pack.created_date}}
+<a href="{% url 'edit_pack' pack.id %}"><button>Edit Pack</button></a>
+<a href="{% url 'remove_pack_from_course' course.id pack.id %}"><button>Remove from required</button></a>
+{% empty %}
+<p>No pack added to course yet</p>
+{% endfor %}
+
+<p>Add other packs</p>
+
+<a href="{% url 'add_pack' %}"><button>Create a new pack</button></a>
+
+{% for pack in all_pack_list %}
+{{pack.name}}
+{{pack.category}}
+{{pack.created_date}}
+<a href="{% url 'edit_pack' pack.id %}"><button>Edit Pack</button></a>
+<a href="{% url 'add_pack_to_course' course.id pack.id %}"><button>Add to required</button></a>
+{% endfor %}
+<a href="{% url 'teacher_dashboard' %}"><button>Back</button></a>

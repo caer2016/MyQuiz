@@ -8,7 +8,16 @@
 </head>
 <body>
     <p>Hello Teacher</p>
-    <h3><a href="/user/teacher_dashboard/courses/new_course">Tạo lớp học mới</a></h3>
-    <h3><a href="/user/teacher_dashboard/courses/personal_courses">Danh sách lớp học hiện có</a></h3>
+    <h3><a href="{% url 'create_course' %}">Create a new course</a></h3>
+    {% if courses_list %}
+        <h3>Courses you're managing</h3><br>
+        {% for course in courses_list%}
+            {{course.courseName}}
+            <a href="{% url 'edit_course' course.id %}">Edit</a>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>You aren't managing any courses</p>
+    {% endif %}
 </body>
 </html>

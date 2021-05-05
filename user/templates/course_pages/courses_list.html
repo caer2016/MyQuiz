@@ -15,7 +15,8 @@
 
 {% block content %}
     {% for C in courses %}
-        <h4>{{C.beginDate|date:"d-m-Y"}}<a href="/courses_list/{{C.id}}">{{C.courseName}}</a></h4>
+        <h4>{{C.beginDate|date:"d-m-Y"}}<a href="{% url 'course_data' C.id %}">{{C.courseName}}</a></h4>
+        <a href="{% url 'register_course' C.id %}"><button>Register</button></a>
     {% endfor %}
 {% endblock %}
 
