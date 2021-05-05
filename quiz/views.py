@@ -5,14 +5,16 @@ from datetime import timedelta
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, get_object_or_404
 
+DEFAULT_INTERVAL = timedelta(minutes = 10)
+
 def update_schedule(request, schedule, correct : bool):
 
     if correct:
         schedule.previous_interval *= 2 
         schedule.scheduled_time = now() + schedule.previous_interval
     else:
-        schedule.previous_interval = timedelta(minutes = 10) 
-        schedule.scheduled_time = now() + timedelta(minutes = 10) 
+        schedule.previous_interval = DEFAULT_INTERVAL 
+        schedule.scheduled_time = now() + DEFAULT_INTERVAL 
     
     schedule.save()
     
@@ -149,3 +151,9 @@ def delete_question(request, id):
     question = get_object_or_404(Question, id = id)
     q.delete()
     return HttpResponse("Deleted") #Temporary
+
+def register_pack(user, packid : int):
+    pack = get_object_or_404(QuizPack, id=id)
+
+    for question in pack.question_set.all():
+        QuestionSchedule.objects.create(user = user, question = question, scheduled_time=now(), previous_interval=DEFAULT_INTERVAL)
