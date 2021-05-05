@@ -1,0 +1,9 @@
+{% for pack in pack_list %}
+{{pack.name}}
+{{pack.category}}
+{{pack.created_date}}
+<a href="{% url 'register_pack' pack.id %}"><button>Add to collection</button></a>
+<br>
+{% empty %}
+<p>You've added all packs</p>
+{% endfor %}
