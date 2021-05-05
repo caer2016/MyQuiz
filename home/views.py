@@ -1,8 +1,14 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,reverse
+from django.db.models import Sum
 from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required,user_passes_test
+from django.conf import settings
+from datetime import date, timedelta
+from django.db.models import Q
+from django.contrib.auth.models import User
 from user import forms
-from .models import ClassModel
+from .models import Courses
 
 # Create your views here.
 def index(request):
@@ -42,9 +48,6 @@ def after_login(request):
     elif is_teacher(request.user):
         return redirect('/user/teacher_dashboard/')
 
-def show_class_list(request):
-    #data = {'Classes': ClassModel.objects.all().order_by("-beginDate")}
-    return render(request, 'pages/classes.html', data)
-
-def find_info(request): 
-    return render(request, 'pages/search_info.html')
+def show_courses_list(request):
+    data = {'courses': Courses.objects.all().order_by("-beginDate")}
+    render(request, 'pages/courses_list.html', data)
