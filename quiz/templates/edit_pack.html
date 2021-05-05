@@ -1,0 +1,26 @@
+<form action="{% url 'edit_pack' pack.id %}" method="POST">
+    {% csrf_token %}
+    <label for="name">Pack Name</label>
+    <input type="text" name="name" id="name" value="{{pack.name}}" required>
+
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" value="{{pack.description}}">
+
+    <label for="category">Category</label>
+    <select name="category" id="category" required>
+        <option value="Vocabulary" {% if pack.category == "Vocabulary" %}selected{% endif %}>Vocabulary</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+<a href="{% url 'add_question' pack.id%}"><button>Add Question</button></a>
+{% for question in pack.question_set.all %}
+    {{question.question}}
+    {{question.hint}}
+    {{question.answer}}
+    <a href="{% url 'edit_question' question.id%}"><button>Edit</button></a>
+    <a href="{% url 'delete_question' question.id%}"><button>Delete</button></a>
+    <br>
+{% empty %}
+<p>No questions</p>
+{% endfor %}
