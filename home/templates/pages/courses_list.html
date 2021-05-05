@@ -5,18 +5,18 @@
     <title>Danh sách lớp học hiện có</title>
 </head>
 <body>
-    <form action="" method="post" name="userInput">
+    <form action="" method="post" name="userSearching">
+        {% csrf_token %}
         <input type="text" placeholder="Nhập tên, mã lớp học hoặc tên giáo viên">
         <br>
         <button type="submit">Tìm kiếm</button>
     </form>
-
-    <br>
-
-    {% block content %}
-        {% for course in courses %}
-            <h4>{{course.beginDate|date:"d-m-Y"}}<a href="/courses_list/{{course.id}}">course.courseName</a></h4>
-        {% endfor %}
-    {% endblock %}
 </body>
+
+{% block content %}
+    {% for C in courses %}
+        <h4>{{C.beginDate|date:"d-m-Y"}}<a href="/courses_list/{{C.id}}">{{C.courseName}}</a></h4>
+    {% endfor %}
+{% endblock %}
+
 </html>

@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,reverse
 from django.db.models import Sum
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required,user_passes_test
 from django.conf import settings
 from datetime import date, timedelta
@@ -49,5 +49,10 @@ def after_login(request):
         return redirect('/user/teacher_dashboard/')
 
 def show_courses_list(request):
-    data = {'courses': Courses.objects.all().order_by("-beginDate")}
-    render(request, 'pages/courses_list.html', data)
+    data={'courses': Courses.objects.all().order_by("-beginDate")}
+    if data:
+        return render(request, 'pages/courses_list.html', data)
+    else:
+        return HttpResponse("Hiện tại chưa có khóa học nào")
+
+
