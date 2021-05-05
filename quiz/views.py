@@ -149,8 +149,8 @@ def edit_question(request, id):
 
 def delete_question(request, id):
     question = get_object_or_404(Question, id = id)
-    q.delete()
-    return HttpResponse("Deleted") #Temporary
+    question.delete()
+    return redirect('edit_pack', question.pack.id)
 
 def register_pack(user, packid : int):
     pack = get_object_or_404(QuizPack, id=id)
