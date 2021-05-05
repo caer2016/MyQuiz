@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ff374d5-3305-4bbf-abec-76b5dc473103" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/home/migrations/0002_delete_courses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/migrations/0003_courses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user/templates/course_pages/course_info.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/templates/course_pages/new_course.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizFun/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizFun/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuizFun/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuizFun/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/pages/courses_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/course_pages/courses_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/user_pages/teacher_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/user_pages/teacher_dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
     </list>
