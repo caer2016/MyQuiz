@@ -6,7 +6,6 @@ urlpatterns = [
     path('<int:id>', views.learning_view, name = 'learn'),
     path('complete', views.learning_complete, name = 'learning_complete'),
     path('pack/add', views.add_pack, name = 'add_pack'),
-    path('pack/edit/<int:id>', views.edit_pack, name = 'edit_pack'),
     path('pack/delete/<int:id>', views.delete_pack, name = 'delete_pack'),
     path('pack/question/add/<int:id>', views.add_question, name = 'add_question'),
     path('pack/question/edit/<int:id>', views.edit_question, name = 'edit_question'),

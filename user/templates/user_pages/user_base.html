@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    {% load static %}
+	<meta charset="utf-8">
+	{% block linkcss %}{% endblock %}
+	<title> {%block title %}{% endblock %} </title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/user_base.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
+	<!--wrap begin-->
+	<div class="wrap">
+		<!--header menu begin-->
+		<header>
+			<div class="headerMenu">
+				<div class="logo">Quiz <span>Fun</span></div>
+				<div class="sidebarButton">
+					<i class="fas fa-bars"></i>
+				</div>
+				<ul>
+					<li><a href="#"><i class="fas fa-search"></i></a></li>
+					<li><a href="#"><i class="fas fa-bell"></i></a></li>
+					<li><a href="{% url 'home' %}"><i class="fas fa-power-off"></i></a></li>
+				</ul>
+			</div>
+		</header>
+		<!--header menu end-->
+		<!--sidebar begin-->
+		<div class="sidebar">
+			<div class="sidebarMenu">
+				<center class="profile">
+					<img src="{% static 'images/avt.png' %}">
+					<p>{{user.username}}</p>
+				</center>
+
+                {% block sidebarMenu %}{% endblock %}
+				
+				<li class="item">
+					<a href="#" class="menuButton">
+						<i class="fas fa-info-circle"></i><span>About</span>
+					</a>
+				</li>
+			</div>
+		</div> 
+		<!--sidebar end-->
+		<!--main container begin-->
+		<div class="mainContainer">
+			{% block mainContainer %}
+            {% endblock %}
+		</div>
+		<!--main container end-->
+
+	</div>
+	<!--wrap end-->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".sidebarButton").click(function() {
+				$(".wrap").toggleClass("collapse2");
+			});
+		});
+	</script>
+</body>
+</html>

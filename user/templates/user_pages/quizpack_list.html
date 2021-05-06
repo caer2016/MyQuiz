@@ -1,10 +1,68 @@
-{% for pack in pack_list %}
-{{pack.name}}
-{{pack.category}}
-{{pack.created_date}}
-<a href="{% url 'register_pack' pack.id %}"><button>Add to collection</button></a>
-<br>
-{% empty %}
-<p>You've added all packs</p>
-{% endfor %}
-<a href="{% url 'student_dashboard' %}"><button>Back</button></a>
+{% extends 'user_pages/student_dashboard.html' %}
+{% block mainContainer %}
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Examinations</title>
+    <style media="screen">
+      a:link {
+        text-decoration: none;
+      }
+  
+      h6 {
+        text-align: center;
+      }
+  
+      .row {
+        margin: 100px;
+      }
+      button {
+            float: right;
+            width: 140px;
+            height: 40px;
+            border-radius: 40px;
+            border: 1px solid white;
+            box-shadow: 0px 1px 22px 5px rgba(51,204,153,1);
+        }
+        button:hover{
+            background-color: aquamarine;
+        }
+    </style>
+  </head>
+  <br><br>
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Collections</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+  
+            <th>PackName</th>
+            
+            <th>PackCategory</th>
+
+            <th>CreateDate</th>
+
+            <th>Add to collection</th>
+            
+          </tr>
+        </thead>
+        {% for pack in pack_list %}
+            <tr>
+                <td>{{pack.name}}</td>
+                <td>{{pack.category}}</td>
+                <td>{{pack.created_date}}</td>
+                <td><a class="btn btn-danger btn-xs" href="{% url 'register_pack' pack.id %}"><i class="fas fa-folder-plus"></i></a></td>
+            </tr>
+        {% endfor %} 
+      </table>
+    </div>
+    <a href="{% url 'student_add_packs' %}"><button>Back</button></a>
+  </div>
+  
+  <br><br><br><br><br><br>
+    
+{% endblock %}

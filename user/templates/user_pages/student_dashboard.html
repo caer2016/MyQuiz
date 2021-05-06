@@ -1,38 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Hello Student</p>
-    {% if schedule %}
-        <p>Your schedule for today</p><br>
-        <a href="{% url 'learn' %}"><button>Learn all</button></a>
-        <br>
-        {% for pack in schedule %}
-            {{pack.name}}
-            {{pack.scheduled_count}}
-            <a href="{% url 'learn' pack.id %}"><button>Learn</button></a>
-            <br>
-        {% endfor %}
-    {% else %}
-        <p>Your schedule is empty for today</p>
-    {% endif %}
+{% extends "user_pages/user_base.html" %}
 
-    <p>Your collection</p>
-    <a href="{% url 'all_quizpack'%}"><button>Add more packs</button></a>
-    <br>
-    {% for pack in collection %}
-        {{pack.name}}
-        {{pack.name}}
-        {{pack.category}}
-        {{pack.created_date}}
-        <a href="{% url 'unregister_pack' pack.id %}"><button>Remove from collection</button></a>
-        <br>
-    {% endfor %}
-    <a href="{% url 'courses' %}"><button>Register to a course</button></a>
-</body>
-</html>
+{% block sidebarMenu %}
+    <li class="item">
+        <a href="{% url 'student_learn' %}" class="menuButton">
+            <i class="fas fa-desktop"></i><span>Learn</span>
+        </a>
+    </li>
+    <li class="item" id="class">
+        <a href="{% url 'student_add_packs' %}" class="menuButton" >
+            <i class="fas fa-chalkboard-teacher"></i><span>Your collection</span>
+        </a>
+    </li>
+    <li class="item" id="courses">
+        <a href="{% url 'courses' %}" class="menuButton">
+            <i class="fas fa-book"></i><span>Register to a course</span>
+        </a>
+    </li>
+{% endblock %}

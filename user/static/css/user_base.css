@@ -1,0 +1,207 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-family: "Roboto", sans-serif;
+}
+
+body {
+	background: #fff;
+}
+
+.wrap header {
+	z-index: 1;
+	background: #22242A;
+	position: fixed;
+	width: calc(100% - 0%);
+	height: 70px;
+	display: flex;
+	top: 0;
+}
+
+.wrap header .headerMenu {
+	width: calc(100% - 0%);
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 20px;
+}
+
+.wrap header .headerMenu .logo {
+	color: #fff;
+	font-size: 25px;
+	text-transform: uppercase;
+	font-weight: 900;
+}
+
+.wrap header .headerMenu .logo span {
+	color: #4CCEE8;
+}
+
+.wrap header .headerMenu .sidebarButton {
+	color: #fff;
+	position: absolute;
+	margin-left: 240px;
+	font-size: 22px;
+	font-weight: 900;
+	cursor: pointer;
+	transition: 0.3s;
+	transition-property: color;
+}
+
+.wrap header .headerMenu .sidebarButton:hover {
+	color: #4CCEE8;
+}
+
+.wrap header .headerMenu ul {
+	display: flex;
+}
+
+.wrap header .headerMenu ul li a {
+	background:  #fff;
+	color: #000;
+	display: block;
+	margin: 0 10px;
+	font-size: 18px;
+	width: 34px;
+	height: 34px;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 50%;
+	transition: 0.3s;
+	transition-property: background, color;
+}
+
+.wrap header .headerMenu ul li a:hover {
+	background: #4CCEE8;
+	color:#fff;
+}
+
+.wrap .sidebar {
+	z-index: 1;
+	background: #2F323A;
+	position: fixed;
+	top: 70px;
+	width: 250px;
+	height: calc(100% - 9%);
+	transition: 0.3s;
+	transition-property: width;
+	overflow-y: auto;
+}
+
+.wrap .sidebar .sidebarMenu {
+	overflow: hidden;
+}
+
+.wrap .sidebar .sidebarMenu .profile img {
+	margin: 20px 0;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.wrap .sidebar .sidebarMenu .profile p {
+	color: #bbb;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.wrap .sidebar .sidebarMenu .item {
+	width: 250px;
+	overflow: hidden;
+}
+
+.wrap .sidebar .sidebarMenu .item .menuButton {
+	display: block;
+	color: #fff;
+	position: relative;
+	padding: 25px 20px;
+	transition: 0.3s;
+	transition-property: color;
+}
+
+.wrap .sidebar .sidebarMenu .item .menuButton:hover {
+	color: #4CCEE8;
+}
+
+.wrap .sidebar .sidebarMenu .item .menuButton i {
+	margin-right: 20px;
+}
+
+.wrap .sidebar .sidebarMenu .item .menuButton .drop-down {
+	float: right;
+	font-size: 12px;
+	margin-top: 3px;
+}
+
+.wrap .sidebar .sidebarMenu .item .subMenu {
+	background: #3498DB;
+	max-height: 0;
+	overflow: hidden;
+	transition: 0.3s;
+	transition-property: background, max-height;
+}
+
+.wrap .sidebar .sidebarMenu .item .subMenu a {
+	display: block;
+	position: relative;
+	color: #fff;
+	white-space: nowrap;
+	font-size: 15px;
+	padding: 20px;
+	border-bottom: 1px solid #8FC5E9;
+	transition: 0.3s;
+	transition-property: background;
+}
+
+.wrap .sidebar .sidebarMenu .item .subMenu a:hover {
+	background:  #55B1F0;
+}
+
+.wrap .sidebar .sidebarMenu .item .subMenu i {
+	padding-right: 20px;
+	font-size: 10px;
+}
+
+.wrap .sidebar .sidebarMenu .item:target .subMenu {
+	max-height: 500px;
+}
+
+.wrap .mainContainer {
+	width: calc(100% - 250px);
+	margin-top: 70px;
+	margin-left: 250px;
+	padding: 15px;
+	background: url('../images/bg.jpg')no-repeat;
+	background-size: cover;
+	height: 100vh;
+	transition: 0.3s;
+
+}
+
+.wrap.collapse2 .sidebar {
+	width: 70px;
+}
+
+.wrap.collapse2 .sidebar .profile img,
+.wrap.collapse2 .sidebar .profile p,
+.wrap.collapse2 .sidebar a span {
+	display: none;
+}
+
+.wrap.collapse2 .sidebar .sidebarMenu .item .menuButton {
+	font-size: 23px;
+}
+
+.wrap.collapse2 .sidebar .sidebarMenu .item .subMenu i {
+	font-size: 18px;
+	padding-left: 3px;
+}
+
+.wrap.collapse2 .mainContainer {
+	width: calc(100% - 70px);
+	margin-left: 70px;
+}

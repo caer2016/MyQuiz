@@ -1,25 +1,111 @@
-{{course.name}}
 
-<p>Required packs</p>
-{% for pack in added_pack_list %}
-{{pack.name}}
-{{pack.category}}
-{{pack.created_date}}
-<a href="{% url 'edit_pack' pack.id %}"><button>Edit Pack</button></a>
-<a href="{% url 'remove_pack_from_course' course.id pack.id %}"><button>Remove from required</button></a>
-{% empty %}
-<p>No pack added to course yet</p>
-{% endfor %}
+{% extends 'user_pages/teacher_base.html' %}
+{% block mainContainer %}
+<head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Examinations</title>
+    <style media="screen">
+      a:link {
+        text-decoration: none;
+      }
+  
+      h6 {
+        text-align: center;
+      }
+  
+      .row {
+        margin: 100px;
+      }
+      button {
+          margin-top: 50px;
+          margin-right: 35px;
+            float: right;
+            width: 140px;
+            height: 40px;
+            border-radius: 40px;
+            border: 1px solid white;
+            box-shadow: 0px 1px 22px 5px rgba(51,204,153,1);
+        }
+        button:hover{
+            background-color: aquamarine;
+        }
+    </style>
+  </head>
+  <br><br>
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Packs in required list</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+  
+            <th>PackName</th>
+            
+            <th>PackCategory</th>
 
-<p>Add other packs</p>
+            <th>CreateDate</th>
 
-<a href="{% url 'add_pack' %}"><button>Create a new pack</button></a>
+            <th>Add/Delete</th>
+            
+          </tr>
+        </thead>
+        {% for pack in added_pack_list %}
+            <tr>
+                <td>{{pack.name}}</td>
+                <td>{{pack.category}}</td>
+                <td>{{pack.created_date}}</td>
+                <td><a class="btn btn-danger btn-xs" href="{% url 'remove_pack_from_course' course.id pack.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                <td><a class="btn btn-xs" href="{% url 'add_question' pack.id %}">Edit</a></td>
+            </tr>
+        {% empty %}
+        <p>No pack added to course yet</p>
+        {% endfor %}
 
-{% for pack in all_pack_list %}
-{{pack.name}}
-{{pack.category}}
-{{pack.created_date}}
-<a href="{% url 'edit_pack' pack.id %}"><button>Edit Pack</button></a>
-<a href="{% url 'add_pack_to_course' course.id pack.id %}"><button>Add to required</button></a>
-{% endfor %}
-<a href="{% url 'teacher_dashboard' %}"><button>Back</button></a>
+      </table>
+    </div>
+
+    <br><br>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h6 class="panel-title">Other packs</h6>
+      </div>
+      <table class="table table-hover" id="dev-table">
+        <thead>
+          <tr>
+  
+            <th>PackName</th>
+            
+            <th>PackCategory</th>
+
+            <th>CreateDate</th>
+
+            <th>Add/Delete</th>
+            
+          </tr>
+        </thead>
+        
+              {% for pack in all_pack_list %}
+                  <tr>
+                      <td>{{pack.name}}</td>
+                      <td>{{pack.category}}</td>
+                      <td>{{pack.created_date}}</td>
+                      <td><a class="btn btn-info btn-xs" href="{% url 'add_pack_to_course' course.id pack.id %}">+</a></td>
+                      <td><a class="btn btn-xs" href="{% url 'add_question' pack.id %}">Edit</a></td>
+                  </tr>
+              {% endfor %}
+      </table>
+    </div>
+    <a href="{% url 'teacher_dashboard' %}"><button>Back</button></a>    
+    <a href="{% url 'add_pack' %}"><button>Add pack</button></a>    
+    
+
+  </div>
+  
+  <br><br><br><br><br><br>
+    
+{% endblock %}
+

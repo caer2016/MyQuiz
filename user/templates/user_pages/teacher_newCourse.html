@@ -1,0 +1,15 @@
+{% extends "user_pages/teacher_base.html"%}
+
+{% load static %}
+
+{% block linkcss %}
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/teacher_newCourse.css' %}"> -->
+{% endblock %}
+
+{% block title %}New Course{% endblock %}
+
+{% block mainContainer %}
+{% include "quiz_pages/add_pack.html" %}
+{% endblock %}
+

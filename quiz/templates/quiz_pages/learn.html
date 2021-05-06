@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head>
+        <style>
+            html, body {
+                height: 100%;
+                font-size: 25px;
+            }
+            footer {
+                border: 1px solid black;
+                padding-left: calc(100% - 58%);
+                padding-bottom: 20px;
+                padding-top: 20px;
+                background-color: rgb(218, 215, 215);
+            }
+            #ans, #ans2 {
+                display: none;
+            }
+            p {
+                text-align: center;
+            }
+
+            button {
+                width: 15%;
+                padding: 15px;
+                border-radius: 25px;
+            }
+        </style>
+    </head>
+</head>
+<body>
+    <div style="min-height:85%;" onclick="showw()">
+        <p>{{question.question}}</p>
+        <hr>
+        <p id="ans">{{question.answer}} <br></p>
+        <p id="instruct">Click to reveal answer<br></p>
+    </div>
+    <footer id="ans2">
+        <form action="{% if packid %}{% url 'learn' packid %}{% else %}{% url 'learn' %}{% endif %}" method="post">
+            {% csrf_token %}
+            <button name="correct" value="True">Pass</button>
+            <button name="correct" value="False">Fail</button>
+        </form>
+    </footer>
+    <script>
+        var x = document.getElementById("ans");
+        var y = document.getElementById("ans2");
+        var z = document.getElementById("instruct");
+        function showw() {
+            x.style.display = "block";
+            y.style.display = "block";
+            z.style.display = "none";
+        }
+    </script>
+</body>
+</html>

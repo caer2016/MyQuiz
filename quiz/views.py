@@ -38,14 +38,15 @@ def learning_view(request, id = None):
     if len(scheduled)==0:
         return redirect('learning_complete')
 
-    learning = scheduled.order_by('scheduled_time', 'question__id').first()
+    learning = scheduled.order_by('scheduled_time').first()
     request.session['learning'] = learning.id
 
-    return render(request, 'learn.html', {'question' : learning.question, 'packid':id})
+    return render(request, 'quiz_pages/learn.html', {'question' : learning.question})
 
 def learning_complete(request):
 
-    return render(request, 'learn_complete.html')
+    #del request.session['learning']
+    return render(request, 'quiz_pages/learn_complete.html')
 
 def add_pack(request):
 
@@ -55,7 +56,7 @@ def add_pack(request):
             pack_name = request.POST['name']
             category = request.POST['category']
         except:
-            return render(request, 'add_pack.html', {'failed' : True})
+            return render(request, 'quiz_pages/add_pack.html', {'failed' : True})
         
         try:
             description = request.POST['description']
@@ -64,40 +65,15 @@ def add_pack(request):
 
         q = QuizPack.objects.create(name = pack_name, description = description, category = category)
         q.save()
-        return redirect('edit_pack', q.id)
+        
+        return redirect('add_question', q.id)
 
-    return render(request, 'add_pack.html')
-
-def edit_pack(request, id):
-
-    pack = get_object_or_404(QuizPack, id = id)
-
-    if request.method == 'POST':
-
-        try:
-            pack_name = request.POST['name']
-            category = request.POST['category']
-        except:
-            return render(request, 'edit_pack.html', {'failed' : True})
-
-        pack.name = pack_name
-
-        try:
-            description = request.POST['description']
-            pack.description = description
-        except:
-            pass
-
-        pack.category = category
-        pack.save()
-        return redirect('edit_pack', pack.id)
-
-    return render(request, 'edit_pack.html', {'pack' : pack, 'current_course_id' : request.session['current_course_id']})
+    return render(request, 'quiz_pages/add_pack.html')
 
 def delete_pack(request, id):
     pack = get_object_or_404(QuizPack, id = id)
     pack.deltete()
-    return redirect('edit_course', request.session['current_course_id'])
+    return HttpResponse("Deleted") #Temporary. REPLACE THIS WITH REDIRECT
 
 def add_question(request, id):
     pack = get_object_or_404(QuizPack, id = id)
@@ -108,7 +84,7 @@ def add_question(request, id):
             question = request.POST['question']
             answer = request.POST['answer']
         except:
-            return render(request, 'add_question.html', {'failed' : True, 'packid' : id})
+            return render(request, 'user_pages/teacher_addQuestion.html', {'failed' : True, 'packid' : id})
         
         try:
             hint = request.POST['hint']
@@ -118,9 +94,11 @@ def add_question(request, id):
         q = Question.objects.create(question = question, answer = answer, hint = hint, pack = pack)
         q.save()
 
-        return render(request, 'add_question.html', {'success' : True, 'packid' : id})
-
-    return render(request, 'add_question.html', {'packid' : id})
+        existing_question_list = Question.objects.filter(pack = pack)
+        return render(request, 'user_pages/teacher_addQuestion.html', {'success' : True, 'packid' : id, 'existing_question_list': existing_question_list, 'pack': pack})
+    
+    existing_question_list = Question.objects.filter(pack = pack)
+    return render(request, 'user_pages/teacher_addQuestion.html', {'packid' : id, 'existing_question_list': existing_question_list, 'pack': pack    })
 
 def edit_question(request, id):
     question = get_object_or_404(Question, id = id)
@@ -131,7 +109,7 @@ def edit_question(request, id):
             questionin = request.POST['question']
             answerin = request.POST['answer']
         except:
-            return render(request, 'edit_question.html', {'failed' : True})
+            return render(request, 'user_pages/teacher_editQuestion.html', {'failed' : True})
         question.question = questionin
         question.answer = answerin
         
@@ -142,15 +120,15 @@ def edit_question(request, id):
             pass
         question.save()
 
-        return redirect('edit_pack', question.pack.id)
+        return redirect('teacher_dashboard', question.pack.id)
 
-    return render(request, 'edit_question.html', {'question' : question, 'packid': question.pack.id})
+    return render(request, 'user_pages/teacher_editQuestion.html', {'question' : question, 'packid': question.pack.id})
 
 
 def delete_question(request, id):
     question = get_object_or_404(Question, id = id)
     question.delete()
-    return redirect('edit_pack', question.pack.id)
+    return redirect('add_question', question.pack.id)
 
 def register_pack(user, packid):
     pack = get_object_or_404(QuizPack, id=packid)

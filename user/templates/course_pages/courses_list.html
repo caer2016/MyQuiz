@@ -1,23 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "user_pages/student_dashboard.html" %}
+{%block title %}{% endblock %}
+{% block mainContainer %}
 <head>
-    <meta charset="UTF-8">
-    <title>Danh sách lớp học hiện có</title>
+    <style>
+        input {
+            margin-top: 50px;
+            margin-left: 50px;
+            width: 300px;
+            box-sizing: border-box;
+            border: 2px solid rgb(218, 80, 80);
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: rgb(230, 187, 220);
+            background-image: url('searchicon.png');
+            background-position: 10px 10px; 
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+        input:hover {
+            border: 2px solid rgb(211, 21, 21);
+        }
+
+        input:focus {
+            width: 80%;
+        }
+
+
+#searchBtn {
+	background:  #fff;
+	color: #000;
+	display: block;
+    margin-left: 50px;
+	margin-top: 2px;
+	font-size: 18px;
+	width: 100px;
+    margin-top: 20px;
+	height: 35px;
+    border: 1px solid black;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 8px;
+	transition: 0.3s;
+	transition-property: background, color;
+    margin-bottom: 10px;
+}
+
+#searchBtn:hover {
+	background: #4CCEE8;
+	color:#fff;
+}
+        table {
+            border: 1px solid black;
+            width: 100%;
+            background-color: #eee;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        tr:hover {background-color:#e0c6f1;}
+
+        #rowOne {
+            background-color: rgb(202, 42, 202);
+            color: #fff;
+        }
+
+        h1 {
+            margin-top: 30px;
+            text-transform: uppercase;
+            color: black;
+            font-size: 40px;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        .clickV{
+            width: 100%;
+            height: 100%;
+            color: black;
+            font-size: 16px;
+            border:0;
+        }
+        .clickV:hover {
+            background-color: #e293b1;
+        }
+
+    </style>
 </head>
-<body>
     <form action="" method="post" name="userSearching">
         {% csrf_token %}
-        <input type="text" placeholder="Nhập tên, mã lớp học hoặc tên giáo viên">
-        <br>
-        <button type="submit">Tìm kiếm</button>
+        <input type="text" placeholder="Nhập tên hoặc mã lớp học">
+        <a href="#" id="searchBtn" ><i class="fas fa-search">Search</i></a>
     </form>
 </body>
 
-{% block content %}
-    {% for C in courses %}
-        <h4>{{C.beginDate|date:"d-m-Y"}}<a href="{% url 'course_data' C.id %}">{{C.courseName}}</a></h4>
-        <a href="{% url 'register_course' C.id %}"><button>Register</button></a>
+<hr color="red" size="5px" width="90%">
+<h1>Courses List</h1>
+<table>
+    <tr id="rowOne">
+        <th>Course Name</th>
+        <th>Create Date</th>
+        <th> </th>
+      </tr>
+      {% for C in courses %}
+    <tr>
+      <td>{{C.courseName}}</td>
+      <td>{{C.beginDate|date:"d-m-Y"}}</td>
+      <td><a href="{% url 'register_course' C.id %}"><button class="clickV">Register</button></a></td>
+    </tr>
+    {% empty %}
+    <p>No Course</p>
     {% endfor %}
-{% endblock %}
+</table>
+<br><br><br><br><br><br><br><br>
 
-</html>
+{% endblock %}

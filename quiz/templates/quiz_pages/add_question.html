@@ -1,0 +1,175 @@
+{% if failed %}
+<p>Error adding question. Please try again</p>
+{% endif %}
+
+{% if success %}
+{% endif %}
+
+<head>
+    <style>
+        form {
+            margin: 50px;
+        }
+        label {
+            margin-left: 20px;
+            float: left;
+            clear: left;
+            color: black;
+            font-size: 20px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px black;
+        }
+        input {
+            background-color: #f1f1f1;
+            width: calc(100% - 15%);
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 50px;
+            border: 5px solid #e0c6f1;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+            float: left;
+            clear: left;
+          }
+          
+          input:focus {
+          border: 5px solid #58257b;
+          }
+
+        select {
+            margin-top: 10px;
+            outline: none;
+            float: left;
+            clear: left;
+            border-radius: 50px;
+            border: 5px solid #e0c6f1;
+            width: calc(100% - 15%);
+            padding: 14px 14px;
+            background-color: #f1f1f1;
+        }
+        select:focus {
+            border: 5px solid #58257b; 
+        }
+        #backDash, #subBtn {
+            margin: 50px auto;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            text-shadow: 1px 1px 3px black;
+            width: 180px;
+            height: 45px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 300;
+            color: #000;
+            background-color: #e0c6f1;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0px 1px 15px 5px #58257b;
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+        #subBtn:hover, #backDash:hover {
+            background-color: #d388e2;
+        }
+        #packName {
+            text-transform: uppercase;
+            color: black;
+            font-size: 40px;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px black;
+        }
+        #backDash {
+            float: left;
+        }
+
+        table {
+            border: 1px solid black;
+            width: 100%;
+            background-color: #eee;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        tr:hover {background-color:#e0c6f1;}
+
+        #rowOne {
+            background-color: rgb(202, 42, 202);
+            color: #fff;
+        }
+
+        h1 {
+            margin-top: 30px;
+            text-transform: uppercase;
+            color: black;
+            font-size: 40px;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px black;
+        }
+        .clickV{
+            width: 100%;
+            height: 100%;
+            color: black;
+            font-size: 16px;
+            border:0;
+        }
+        .clickV:hover {
+            background-color: #e293b1;
+        }
+    </style>
+</head>
+
+
+
+
+<p id="packName">{{pack.name}}</p>
+
+<a href="{% url 'teacher_dashboard' %}" style="margin-left: 50px;"><button id="subBtn">Back</button></a>
+<form action="{% url 'add_question' packid%}" method="POST">
+    {% csrf_token %}
+    <label for="question">Question</label>
+    <input type="text" name="question" id="question" required>
+
+    <label for="answer">Answer</label>
+    <input type="text" name="answer" id="answer" required>
+
+    <label for="hint">Hint</label>
+    <input type="text" name="hint" id="hint">
+
+    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br>
+    <button type="submit" id="subBtn">Submit</button>
+</form>
+
+<!-- <hr  width="85%" align="left" color="#d388e2" size="5px"> -->
+<h1>Question List</h1>
+<table>
+    <tr id="rowOne">
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Hint</th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    {% for question in existing_question_list.all %}
+    <tr>
+      <td>{{question.question}}</td>
+      <td>{{question.answer}}</td>
+      <td>{{question.hint}}</td>
+      <td class="btnSet"><a href="{% url 'edit_question' question.id%}" ><button class="clickV">Edit</button></a></td>
+      <td class="btnSet"><a href="{% url 'delete_question' question.id%}"><button class="clickV">Delete</button></a></td>
+    </tr>
+    
+    <br>
+    {% empty %}
+    <p>No questions</p>
+    {% endfor %}
+</table>
+<br><br><br><br><br><br><br><br>

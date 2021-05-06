@@ -1,0 +1,91 @@
+{% if failed %}
+<p>Error adding pack. Please try again</p>
+{% endif %}
+
+    <head>
+        <style>
+            form {
+                margin: 50px;
+            }
+            label {
+                margin-left: 20px;
+                float: left;
+                clear: left;
+                color: black;
+                font-size: 20px;
+                font-weight: 600;
+                text-shadow: 1px 1px 3px black;
+            }
+            input {
+                background-color: #f1f1f1;
+                width: calc(100% - 10%);
+                padding: 12px 20px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                border-radius: 50px;
+                border: 5px solid #e0c6f1;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+                float: left;
+                clear: left;
+              }
+              
+              input:focus {
+              border: 5px solid #58257b;
+              }
+
+            select {
+                margin-top: 10px;
+                outline: none;
+                float: left;
+                clear: left;
+                border-radius: 50px;
+                border: 5px solid #e0c6f1;
+                width: calc(100% - 10%);
+                padding: 14px 14px;
+                background-color: #f1f1f1;
+            }
+            select:focus {
+                border: 5px solid #58257b; 
+            }
+            button {
+                margin: 50px auto;
+                margin-left: 20px;
+                text-shadow: 1px 1px 3px black;
+                width: 200px;
+                height: 45px;
+                font-family: 'Roboto', sans-serif;
+                font-size: 15px;
+                text-transform: uppercase;
+                letter-spacing: 2.5px;
+                font-weight: 300;
+                color: #000;
+                background-color: #e0c6f1;
+                border: none;
+                border-radius: 30px;
+                box-shadow: 0px 1px 15px 5px #58257b;
+                transition: all 0.3s ease 0s;
+                cursor: pointer;
+                outline: none;
+            }
+            button:hover {
+                background-color: #d388e2;
+            }
+        </style>
+    </head>
+
+    <form action="{% url 'add_pack'%}" method="POST">
+    {% csrf_token %}
+    <label for="name">Pack Name</label>
+    <input type="text" name="name" id="name" required>
+
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description">
+
+    <label for="category">Category</label>
+    <select name="category" id="category" required>
+        <option value="Vocabulary">Vocabulary</option>
+    </select>
+    <button type="submit">Submit</button>
+    </form>

@@ -1,23 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>Hello Teacher</p>
-    <h3><a href="{% url 'create_course' %}">Create a new course</a></h3>
-    {% if courses_list %}
-        <h3>Courses you're managing</h3><br>
-        {% for course in courses_list%}
-            {{course.courseName}}
-            <a href="{% url 'edit_course' course.id %}">Edit</a>
-            <br>
-        {% endfor %}
-    {% else %}
-        <p>You aren't managing any courses</p>
-    {% endif %}
-</body>
-</html>
+{% extends "user_pages/teacher_base.html" %}
+
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block mainContainer %}
+    <head>
+        
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <style type="text/css">
+            a:link {
+              text-decoration: none;
+            }
+        
+            .order-card {
+              color: rgb(255, 255, 255);
+            }
+        
+            .bg-c-blue {
+              background: #04868f;
+            }
+        
+            .bg-c-green {
+              background:#4C51BF;
+            }
+        
+            .bg-c-yellow {
+              background: #F56565;
+            }
+        
+            .bg-c-pink {
+              background: #663a30;
+            }
+        
+        
+            .card {
+              
+              -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+              box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+              border: 1px solid black;
+              margin-bottom: 30px;
+              -webkit-transition: all 0.3s ease-in-out;
+              transition: all 0.3s ease-in-out;
+            }
+        
+            .card .card-block {
+              padding: 25px;
+            }
+        
+            .order-card i {
+              font-size: 26px;
+            }
+        
+            .f-left {
+              float: left;
+            }
+        
+            .f-right {
+              float: right;
+            }
+            .container {
+              margin-top: 80px;
+            }
+            header {
+            left: 0px;
+            right: 0px;
+          }
+          </style>
+    </head>
+    <div class="container">
+    <div class="row">
+      
+        <div class="col-md-4 col-xl-4">
+            <div class="card bg-c-green order-card">
+              <div class="card-block">
+                <h3 class="m-b-20">Total Courses </h3>
+                <h2 class="text-right"><i class="fas fa-user-graduate f-left"></i><span>{{total_courses}}</span></h2>
+                
+              </div>
+            </div>
+          </div>
+  
+      <div class="col-md-4 col-xl-4">
+        <div class="card bg-c-yellow order-card">
+          <div class="card-block">
+            <h3 class="m-b-20">Total Packs</h3>
+           <h2 class="text-right"><i class="fas fa-book f-left"></i><span>{{total_packs}}</span></h2>
+            
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-4 col-xl-4">
+        <div class="card bg-c-pink order-card">
+          <div class="card-block">
+            <h3 class="m-b-20">Total Questions</h3>
+            <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_questions}}</span></h2>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

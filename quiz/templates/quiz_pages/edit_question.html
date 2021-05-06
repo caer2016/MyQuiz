@@ -1,0 +1,96 @@
+{% if failed %}
+<p>Error editting question. Please try again</p>
+{% endif %}
+
+<head>
+    <style>
+        form {
+            margin: 50px;
+        }
+        label {
+            margin-left: 20px;
+            float: left;
+            clear: left;
+            color: black;
+            font-size: 20px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px black;
+        }
+        input {
+            background-color: #f1f1f1;
+            width: calc(100% - 15%);
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border-radius: 50px;
+            border: 5px solid #e0c6f1;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+            float: left;
+            clear: left;
+          }
+          
+          input:focus {
+          border: 5px solid #58257b;
+          }
+
+        select {
+            margin-top: 10px;
+            outline: none;
+            float: left;
+            clear: left;
+            border-radius: 50px;
+            border: 5px solid #e0c6f1;
+            width: calc(100% - 15%);
+            padding: 14px 14px;
+            background-color: #f1f1f1;
+        }
+        select:focus {
+            border: 5px solid #58257b; 
+        }
+        .btnEditQues {
+            margin: 50px auto;
+            margin-bottom: 5px;
+            margin-left: 20px;
+            text-shadow: 1px 1px 3px black;
+            width: 180px;
+            height: 45px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 300;
+            color: #000;
+            background-color: #e0c6f1;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0px 1px 15px 5px #58257b;
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+        }
+        .btnEditQues:hover {
+            background-color: #d388e2;
+        }
+        #backQues {
+            float: right;
+        }
+    </style>
+</head>
+
+<a href="{% url 'add_question' packid %}"><button class="btnEditQues" id="backQues">Back</button></a>
+
+<form action="{% url 'edit_question' question.id %}" method="POST">
+    {% csrf_token %}
+    <label for="question">Question</label>
+    <input type="text" name="question" id="question" value="{{question.question}}" required>
+
+    <label for="answer">Answer</label>
+    <input type="text" name="answer" id="answer" value="{{question.answer}}"required>
+
+    <label for="hint">Hint</label>
+    <input type="text" name="hint" id="hint" value="{{question.hint}}">
+
+    <button type="submit" class="btnEditQues">Submit</button>
+</form>

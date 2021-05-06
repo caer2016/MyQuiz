@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from . import forms
 from .models import Courses
+from quiz.models import QuizPack, Question
 from home.views import is_teacher, is_student
 from quiz.models import QuizPack, QuestionSchedule
 from quiz.views import register_pack, unregister_pack
@@ -11,10 +12,13 @@ from django.utils.timezone import now
 
 # Create your views here.
 
-def student_dashboard(request):
+def student_learn(request):
     schedule = QuestionSchedule.objects.filter(user=request.user, scheduled_time__lte=now()).values('question__pack').annotate(scheduled_count=Count('question__pack'), name=F('question__pack__name'), id=F('question__pack__id')).order_by('name')
+    return render(request, 'user_pages/learn.html', {'schedule' : schedule})
+
+def student_add_packs(request):
     collection = QuizPack.objects.filter(registered_user = request.user)
-    return render(request, 'user_pages/student_dashboard.html', {'schedule' : schedule, 'collection' : collection})
+    return render(request, 'user_pages/student_add_packs.html', {'collection' : collection})
 
 def show_courses_list(request):
     data={'courses': Courses.objects.filter(~Q(student=request.user)).order_by("beginDate")}
@@ -46,11 +50,20 @@ def register_quizpack_view(request, id):
 
 def unregister_quizpack_view(request, id):
     unregister_pack(request.user, id)
-    return redirect('student_dashboard')
+    return redirect('student_learn')
 
 def teacher_dashboard(request):
     courses_list = Courses.objects.filter(manageTeacher = request.user)
-    return render(request, 'user_pages/teacher_dashboard.html', {'courses_list' : courses_list})
+    dict = {
+        'total_courses':Courses.objects.all().count(),
+        'total_packs':QuizPack.objects.all().count(),
+        'total_questions':Question.objects.all().count()
+    }
+    return render(request, 'user_pages/teacher_dashboard.html', context=dict)
+
+def show_courses_list_2(request):
+    dict = {'courses':Courses.objects.all()}
+    return render(request, 'user_pages/teacher_show_courses_list.html', context=dict)
 
 def create_new_course(request):
     if not is_teacher(request.user):
@@ -94,3 +107,11 @@ def remove_pack_from_course(request, courseid, packid):
         course.required.remove(pack)
     
     return redirect('edit_course', courseid)
+
+
+def teacher_newCourse(request):
+    return render(request, 'user_pages/teacher_newCourse.html')
+
+def teacher_pack_list(request):
+    pack_list = QuizPack.objects.all()
+    return render(request, 'user_pages/teacher_quizpack_list.html', {'pack_list': pack_list})

@@ -1,13 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+
+{% extends 'user_pages/teacher_base.html'%}
+{% block title %}NewCourse{% endblock %}
+{% block mainContainer %}
 <head>
-    <meta charset="UTF-8">
-    <title>Tạo lớp học mới</title>
+    <style>
+        form {
+                margin-top: 120px;
+                margin-left: 100px;
+            }
+            label {
+                margin-left: 20px;
+                float: left;
+                clear: left;
+                color: black;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 1px 1px 3px black;
+            }
+            input {
+                background-color: #f1f1f1;
+                width: calc(100% - 10%);
+                padding: 15px 25px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                border-radius: 50px;
+                border: 5px solid #e0c6f1;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+                float: left;
+                clear: left;
+              }
+              
+              input:focus {
+              border: 5px solid #58257b;
+              }
+    </style>
 </head>
-<body>
     <form action="{% url 'create_course' %}" method="post">
         {% csrf_token %}
-        Course name: <input type="text" placeholder="Nhập vào tên khóa học" name="newCourseName">
+        <label for="newCourseName">Course name: </label>
+        <input type="text" placeholder="Nhập vào tên khóa học" name="newCourseName">
     </form>
-</body>
-</html>
+    {% endblock %}

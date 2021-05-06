@@ -1,0 +1,27 @@
+{% extends "user_pages/user_base.html" %}
+
+{% block sidebarMenu %}
+    <li class="item">
+        <a href="{% url 'teacher_dashboard' %}" class="menuButton">
+            <i class="fas fa-desktop"></i><span>Dashboard</span>
+        </a>
+    </li>
+    <li class="item" id="class">
+        <a href="#class" class="menuButton" >
+            <i class="fas fa-chalkboard-teacher"></i><span>Courses <i class="fas fa-chevron-down drop-down"></i></span>
+        </a>
+        <div class="subMenu">
+            <a href="{% url 'create_course'%}"><i class="far fa-plus-square"></i><span>New Course</span></a>
+            <a href="{% url 'courses_list'%}"><i class="fas fa-school"></i><span>List Courses</span></a>
+        </div>
+    </li>
+    <li class="item" id="courses">
+        <a href="#courses" class="menuButton">
+            <i class="fas fa-book"></i><span>Packs <i class="fas fa-chevron-down drop-down"></i></span>
+        </a>
+        <div class="subMenu">
+            <a href="{% url 'teacher_newCourse' %}"><i class="far fa-plus-square"></i><span>New Pack</span></a>
+            <a href="{% url 'teacher_pack_list' %}"><i class="far fa-address-book"></i></i><span>List Packs</span></a>
+        </div>
+    </li>
+{% endblock %}
